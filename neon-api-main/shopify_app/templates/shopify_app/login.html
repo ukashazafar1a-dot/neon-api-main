@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Shopify App — Installation</title>
+
+  {% load static %}
+
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://unpkg.com/@shopify/polaris@6.1.0/dist/styles.css" />
+  <link rel="stylesheet" type="text/css" href="{% static 'shopify_app/style.css' %}">
+</head>
+
+<body>
+  <main class="container" role="main">
+    <div class="Polaris-Page Polaris-Page--InstallApp">
+      <div class="Polaris-Page__Content">
+        <div class="Polaris-Layout">
+          <div class="Polaris-Layout__Section">
+            <div class="Polaris-Card">
+              <div class="Polaris-Card__Header">
+                <h1 class="Polaris-Heading">
+                  {{ app_name|default:"Sample App - Installation" }}
+                </h1>
+              </div>
+              <div class="Polaris-Card__Section">
+                <form action="{% url 'login' %}" method="post">{% csrf_token %}
+                  <div class="Polaris-Label">
+                    <label class="Polaris-Label__Text" for='shop'>Enter your shop domain to log in
+                      or install this app.</strong> </label>
+                  </div>
+
+                  <div class="Polaris-TextField{% if messages %} Polaris-TextField--InlineError{% endif %}">
+                    <input id="shop" name="shop" type="text" autofocus="autofocus" placeholder="example.myshopify.com"
+                      class="Polaris-TextField__Input">
+                  </div>
+                  {% if messages %}
+                  {% for message in messages %}
+                  <div class="Polaris-InlineError">{{ message }}</div>
+                  {% endfor %}
+                  {% endif %}
+                  <button type="submit" class="Polaris-Button Polaris-Button--primary Polaris-Button--sizeLarge">
+                    <span class="Polaris-Button__Content"><span>Install app</span>
+                  </button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</body>
+
+</html>
